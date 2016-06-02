@@ -8,7 +8,6 @@ ENV MAX_UPLOAD 50M
 ENV PHP_MAX_FILE_UPLOAD 200
 ENV PHP_MAX_POST 100M
 
-RUN echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN     apk update && \
         apk upgrade && \
         apk add --update tzdata && \
@@ -48,15 +47,13 @@ RUN     apk update && \
                 php-ctype \
                 php-phar \
                 php-phalcon \
-                php-cli \
-                php-xdebug@testing && \
+                php-cli && \
         sed -i "s|;date.timezone =.*|date.timezone = ${TIMEZONE}|" /etc/php/php.ini && \
         sed -i "s|memory_limit =.*|memory_limit = ${PHP_MEMORY_LIMIT}|" /etc/php/php.ini && \
         sed -i "s|upload_max_filesize =.*|upload_max_filesize = ${MAX_UPLOAD}|" /etc/php/php.ini && \
         sed -i "s|max_file_uploads =.*|max_file_uploads = ${PHP_MAX_FILE_UPLOAD}|" /etc/php/php.ini && \
         sed -i "s|post_max_size =.*|max_file_uploads = ${PHP_MAX_POST}|" /etc/php/php.ini && \
         sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/php.ini && \
-        sed -i "s/extension=xdebug.so/zend_extension=xdebug.so/" /etc/php/conf.d/xdebug.ini && \
         mkdir /www && \
         apk del tzdata && \
         rm -rf /var/cache/apk/*
