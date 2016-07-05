@@ -62,7 +62,7 @@ ENV PATH /composer/vendor/bin:$PATH
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-ENV COMPOSER_VERSION 1.1.0
+ENV COMPOSER_VERSION 1.1.3
 
 RUN ln -s /usr/bin/php7 /usr/bin/php && \
     curl -o /tmp/composer-setup.php https://getcomposer.org/installer && \
