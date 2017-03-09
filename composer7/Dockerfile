@@ -17,6 +17,7 @@ RUN     apk update && \
         apk add --update \
         bash \
         git \
+        curl \
                 php7-common@testing \
                 php7-mcrypt@testing \
                 php7-mbstring@testing \
